@@ -7,26 +7,16 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class CalculatorBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        Scanner scanner = new Scanner(System.in);
-        // We check if the update has a message and the message has text
         if (update.hasMessage() && update.getMessage().hasText()) {
             System.out.println(update.getMessage().getChat().toString());
-            SendMessage message = new SendMessage(); // Create a SendMessage object with mandatory fields
-            message.setChatId(update.getMessage().getChatId().toString());
-            System.out.print("enter message: ");
-            message.setText(scanner.next());
+            System.out.println(update.getMessage().getText());
 
-            try {
-                execute(message); // Call method to send the message
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
+            sendCustomKeyboard(update.getMessage().getChatId().toString());
         }
     }
 
@@ -50,23 +40,27 @@ public class CalculatorBot extends TelegramLongPollingBot {
         row.add("4");
         row.add("5");
         row.add("6");
-        row.add("+");
+        row.add("\u00D7");
         keyboard.add(row);
 
         row = new KeyboardRow();
         row.add("1");
         row.add("2");
         row.add("3");
+        row.add("\u00F7"); // Division Sign
+        keyboard.add(row);
+
+        row = new KeyboardRow();
+        row.add("0");
+        row.add(".");
+        row.add("+");
         row.add("=");
         keyboard.add(row);
 
-        // Set the keyboard to the markup
         keyboardMarkup.setKeyboard(keyboard);
-        // Add it to the message
         message.setReplyMarkup(keyboardMarkup);
 
         try {
-            // Send the message
             execute(message);
         } catch (TelegramApiException e) {
             e.printStackTrace();
