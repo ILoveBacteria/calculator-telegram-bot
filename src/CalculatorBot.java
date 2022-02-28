@@ -23,8 +23,10 @@ public class CalculatorBot extends TelegramLongPollingBot {
             System.out.println(text);
 
             if (text.charAt(0) != '/') {
-                if (text.charAt(0) == '=')
+                if (text.charAt(0) == '=') {
                     sendText(calculate(problem), update.getMessage().getChatId().toString());
+                    problem = "";
+                }
                 else
                     problem = problem + text;
             }
