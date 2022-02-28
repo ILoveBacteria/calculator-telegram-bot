@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorBot extends TelegramLongPollingBot {
+    private String problem = "";
+    private boolean isSendCustomKeyboard = true;
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -20,17 +22,24 @@ public class CalculatorBot extends TelegramLongPollingBot {
             System.out.println(update.getMessage().getChat().toString());
             System.out.println(text);
 
-            if (text.charAt(0) >= '0' || text.charAt(0) <= '9')
-                sendText(calculate(text), update.getMessage().getChatId().toString());
+            if (text.charAt(0) != '/') {
+                if (text.charAt(0) == '=')
+                    sendText(calculate(problem), update.getMessage().getChatId().toString());
+                else
+                    problem = problem + text;
+            }
 
-            sendCustomKeyboard(update.getMessage().getChatId().toString());
+            if (isSendCustomKeyboard)
+                sendCustomKeyboard(update.getMessage().getChatId().toString());
         }
     }
 
     private void sendCustomKeyboard(String chatId) {
+        isSendCustomKeyboard = false;
+
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
-        message.setText("true");
+        message.setText("Use this custom keyboard");
 
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         List<KeyboardRow> keyboard = new ArrayList<>();
