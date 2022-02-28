@@ -67,6 +67,15 @@ public class CalculatorBot extends TelegramLongPollingBot {
         }
     }
 
+    public void sendText(String text, String chatId) {
+        SendMessage sendMessage = new SendMessage(chatId, text);
+
+        try {
+            execute(sendMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public String getBotUsername() {
