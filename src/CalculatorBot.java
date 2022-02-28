@@ -30,6 +30,7 @@ public class CalculatorBot extends TelegramLongPollingBot {
     private void sendCustomKeyboard(String chatId) {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
+        message.setText("true");
 
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         List<KeyboardRow> keyboard = new ArrayList<>();
@@ -64,6 +65,7 @@ public class CalculatorBot extends TelegramLongPollingBot {
         keyboard.add(row);
 
         keyboardMarkup.setKeyboard(keyboard);
+        keyboardMarkup.setInputFieldPlaceholder("Write a problem...");
         message.setReplyMarkup(keyboardMarkup);
 
         try {
