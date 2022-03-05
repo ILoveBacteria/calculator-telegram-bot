@@ -1,4 +1,7 @@
 /CalculatorTelegramBot.iml
 /.idea/
-/out/
 /src/META-INF/
+/target/
+/src/test/
+/src/main/java/META-INF/
+/src/main/resources/
