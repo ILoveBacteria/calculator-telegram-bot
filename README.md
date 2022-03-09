@@ -5,6 +5,8 @@
 This is a simple calculator working with Telegram bot. 
 Including addition, subtraction, multiplication and division
 
+![Preview of bot](https://github.com/ILoveBacteria/calculator-telegram-bot/blob/master/assets/preview.png)
+
 ## Libraries
 This project uses the library introduced on the [Telegram website](https://core.telegram.org/bots/samples#java).
 You can find more information about this library [here](https://github.com/rubenlagus/TelegramBots)
