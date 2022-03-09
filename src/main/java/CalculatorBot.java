@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CalculatorBot extends TelegramLongPollingBot {
     private String problem = "";
-    private boolean isSendCustomKeyboard = true;
+    private final ArrayList<Long> usersID = new ArrayList<Long>();
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -31,14 +31,14 @@ public class CalculatorBot extends TelegramLongPollingBot {
                     problem = problem + text;
             }
 
-            if (isSendCustomKeyboard)
+            if (!usersID.contains(update.getMessage().getChatId())) {
                 sendCustomKeyboard(update.getMessage().getChatId().toString());
+                usersID.add(update.getMessage().getChatId());
+            }
         }
     }
 
     private void sendCustomKeyboard(String chatId) {
-        isSendCustomKeyboard = false;
-
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText("Use this custom keyboard");
