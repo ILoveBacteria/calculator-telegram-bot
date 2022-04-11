@@ -50,7 +50,7 @@ git clone https://github.com/ILoveBacteria/calculator-telegram-bot.git
 in the `CalculatorBot` class in the `getBotToken()` method
 
 3. You must enter the username of your bot without '@' in the `CalculatorBot` class in the `getBotUsername()` method
-4. Install [JDK 17](https://www.oracle.com/java/technologies/downloads)
+4. Install [JDK 8](https://www.oracle.com/java/technologies/downloads)
 5. Install [Maven 3](https://maven.apache.org/download.cgi)
 6. Build the project:
 
@@ -59,11 +59,11 @@ mvn clean install
 ```
 
 Maven will read the `pom.xml` and download all dependencies automatically then gives you a jar file named 
-`CalculatorTelegramBot-{version}-jar-with-dependencies.jar`
+`calculator-telegram-bot-{version}-jar-with-dependencies.jar`
 
 7. Run this jar file and enjoy:
 ```shell
-java -jar CalculatorTelegramBot-{version}-jar-with-dependencies.jar
+java -jar calculator-telegram-bot-{version}-jar-with-dependencies.jar
 ```
 
 ## Last Release
