@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CalculatorBot extends TelegramLongPollingBot {
     private String problem = "";
-    private final ArrayList<Long> usersID = new ArrayList<Long>();
+    private final ArrayList<Long> usersID = new ArrayList<>();
 
     @Override
     public void onUpdateReceived(Update update) {
