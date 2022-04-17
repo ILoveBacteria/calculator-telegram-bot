@@ -1,8 +1,10 @@
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
+import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.math.BigDecimal;
@@ -12,7 +14,7 @@ import java.util.List;
 
 public class CalculatorBot extends TelegramLongPollingBot {
     private String problem = "";
-    private final ArrayList<Long> usersID = new ArrayList<>();
+    private final List<User> users = new ArrayList<>();
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -31,9 +33,9 @@ public class CalculatorBot extends TelegramLongPollingBot {
                     problem = problem + text;
             }
 
-            if (!usersID.contains(update.getMessage().getChatId())) {
+            if (!users.contains(update.getMessage().getFrom())) {
                 sendCustomKeyboard(update.getMessage().getChatId().toString());
-                usersID.add(update.getMessage().getChatId());
+                users.add(update.getMessage().getFrom());
             }
         }
     }
