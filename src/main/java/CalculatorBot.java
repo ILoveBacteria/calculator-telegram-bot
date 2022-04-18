@@ -19,12 +19,22 @@ public class CalculatorBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
-            String text = update.getMessage().getText();
+            List<MessageEntity> messageEntity = update.getMessage().getEntities();
+            SendMessage sendMessage;
 
+            String text = update.getMessage().getText();
             System.out.println(update.getMessage().getChat().toString());
             System.out.println(text);
 
-            if (text.charAt(0) != '/') {
+
+            if (messageEntity.size() != 0 && MessageEntities.hasCommand(messageEntity)) {
+                sendMessage = Command.doAction(MessageEntities.getCommand(messageEntity));
+                try {
+                    execute(sendMessage);
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+            } else {
                 if (text.charAt(0) == '=') {
                     sendText(calculate(problem), update.getMessage().getChatId().toString());
                     problem = "";
