@@ -1,5 +1,7 @@
 # Calculator Telegram Bot
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## Description
 
 This is a simple calculator working with Telegram bot. 
@@ -50,7 +52,7 @@ git clone https://github.com/ILoveBacteria/calculator-telegram-bot.git
 in the `CalculatorBot` class in the `getBotToken()` method
 
 3. You must enter the username of your bot without '@' in the `CalculatorBot` class in the `getBotUsername()` method
-4. Install [JDK 8](https://www.oracle.com/java/technologies/downloads)
+4. Install [JDK 8](https://www.oracle.com/java/technologies/downloads) or later
 5. Install [Maven 3](https://maven.apache.org/download.cgi)
 6. Build the project:
 
@@ -65,6 +67,24 @@ Maven will read the `pom.xml` and download all dependencies automatically then g
 ```shell
 java -jar calculator-telegram-bot-{version}-jar-with-dependencies.jar
 ```
+
+## License summary
+
+MIT License
+
+Copyright (c) 2022 Moein Arabi
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+Read the full license [here](https://github.com/ILoveBacteria/calculator-telegram-bot/blob/master/LICENSE)
 
 ## Last Release
 
