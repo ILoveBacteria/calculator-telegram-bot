@@ -29,6 +29,7 @@ public class CalculatorBot extends TelegramLongPollingBot {
 
             if (messageEntity.size() != 0 && MessageEntities.hasCommand(messageEntity)) {
                 sendMessage = Command.doAction(MessageEntities.getCommand(messageEntity));
+                sendMessage.setChatId(update.getMessage().getChatId().toString());
                 try {
                     execute(sendMessage);
                 } catch (TelegramApiException e) {
