@@ -14,6 +14,7 @@ public class Command {
             case START:
                 sendMessage = new SendMessage();
                 sendMessage.setText("Welcome to Calculator bot");
+                break;
             default:
                 sendMessage = new SendMessage();
                 sendMessage.setText("Invalid command!");
