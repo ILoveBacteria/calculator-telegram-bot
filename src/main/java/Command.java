@@ -1,9 +1,21 @@
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
+/**
+ * The Command class contains bot commands.
+ *
+ * @author Moein Arabi
+ * @version 1.0.0
+ */
 public class Command {
     private static final String START = "/start";
     private static final String HELP = "/help";
 
+    /**
+     * This method takes a command and executes it
+     *
+     * @param command A {@code String} command: "/start"
+     * @return A prepared {@link org.telegram.telegrambots.meta.api.methods.send.SendMessage SendMessage} object with text
+     */
     public static SendMessage doAction(String command) {
         if (command == null) {
             return null;

@@ -12,10 +12,28 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is the logic and the core of the bot
+ *
+ * @author Moein Arabi
+ * @version 1.2.0
+ */
 public class CalculatorBot extends TelegramLongPollingBot {
+    /**
+     * Saves the numbers and operation that the user sends
+     */
     private String problem = "";
+
+    /**
+     * List of users who started chatting with the bot
+     */
     private final List<User> users = new ArrayList<>();
 
+    /**
+     * This method is executed when a new message is received
+     *
+     * @param update The {@code update} contains message details
+     */
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
@@ -39,9 +57,9 @@ public class CalculatorBot extends TelegramLongPollingBot {
                 if (text.charAt(0) == '=') {
                     sendText(calculate(problem), update.getMessage().getChatId().toString());
                     problem = "";
-                }
-                else
+                } else {
                     problem = problem + text;
+                }
             }
 
             if (!users.contains(update.getMessage().getFrom())) {
@@ -51,6 +69,11 @@ public class CalculatorBot extends TelegramLongPollingBot {
         }
     }
 
+    /**
+     * This method will send a custom keyboard to user
+     *
+     * @param chatId Unique identifier for this chat
+     */
     private void sendCustomKeyboard(String chatId) {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
@@ -99,6 +122,12 @@ public class CalculatorBot extends TelegramLongPollingBot {
         }
     }
 
+    /**
+     * This method sends a text message
+     *
+     * @param text A {@code String} text message
+     * @param chatId Unique identifier for this chat
+     */
     private void sendText(String text, String chatId) {
         SendMessage sendMessage = new SendMessage(chatId, text);
 
@@ -109,6 +138,12 @@ public class CalculatorBot extends TelegramLongPollingBot {
         }
     }
 
+    /**
+     * This method is called after the user sends "=" then calculates the problem
+     *
+     * @param text A {@code String} math problem
+     * @return Solved math problem
+     */
     private String calculate(String text) {
         BigDecimal result = new BigDecimal("0");
         char operator = '+';
@@ -140,15 +175,27 @@ public class CalculatorBot extends TelegramLongPollingBot {
         return result.toString();
     }
 
+    /**
+     * Checks the parameter if it is math operator or not
+     *
+     * @param c A character that should be checked
+     * @return true or false
+     */
     private boolean isOperator(char c) {
         return c == '+' || c == '-' || c == '\u00F7' || c == '\u00D7';
     }
 
+    /**
+     * Username of bot
+     */
     @Override
     public String getBotUsername() {
         return "CommonCalculatorBot";
     }
 
+    /**
+     * Token
+     */
     @Override
     public String getBotToken() {
         return "5242332503:AAEBRjCafdvOYtLvhlZIngaoUt2WRVDhsvE";
