@@ -1,6 +1,13 @@
 # Calculator Telegram Bot
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Issues](https://img.shields.io/github/issues/ILoveBacteria/calculator-telegram-bot)](https://github.com/ILoveBacteria/calculator-telegram-bot/issues)
+[![Forks](https://img.shields.io/github/forks/ILoveBacteria/calculator-telegram-bot)](https://github.com/ILoveBacteria/calculator-telegram-bot/network/members)
+[![Stars](https://img.shields.io/github/stars/ILoveBacteria/calculator-telegram-bot)]()
+[![Latest release](https://img.shields.io/github/release/ILoveBacteria/calculator-telegram-bot)](https://github.com/ILoveBacteria/calculator-telegram-bot/releases)
+[![Watchers](https://img.shields.io/github/watchers/ILoveBacteria/calculator-telegram-bot)]()
+[![Last commit](https://img.shields.io/github/last-commit/ILoveBacteria/calculator-telegram-bot)](https://github.com/ILoveBacteria/calculator-telegram-bot/commits/master)
+[![Calculator bot](https://img.shields.io/badge/calculator%20bot-on%20telegram-23AAEA)](https://telegram.me/CommonCalculatorBot)
 
 ## Description
 
