@@ -14,6 +14,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.ReadWriteLock;
 
 /**
  * This class is the logic and the core of the bot
@@ -32,9 +33,12 @@ public class CalculatorBot extends TelegramLongPollingBot {
      */
     private final Map<User, Chat> userChatMap;
 
-    public CalculatorBot(Map<User, Chat> userChatMap) {
+    private final ReadWriteLock userChatMapLock;
+
+    public CalculatorBot(Map<User, Chat> userChatMap, ReadWriteLock userChatMapLock) {
         super();
         this.userChatMap = userChatMap;
+        this.userChatMapLock = userChatMapLock;
     }
 
     /**
@@ -70,6 +74,7 @@ public class CalculatorBot extends TelegramLongPollingBot {
                 }
             }
 
+            userChatMapLock.writeLock().lock();
             if (!userChatMap.containsKey(update.getMessage().getFrom())) {
                 sendCustomKeyboard(update.getMessage().getChatId().toString());
 
@@ -83,6 +88,7 @@ public class CalculatorBot extends TelegramLongPollingBot {
                     e.printStackTrace();
                 }
             }
+            userChatMapLock.writeLock().unlock();
         }
     }
 
