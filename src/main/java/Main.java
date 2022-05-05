@@ -1,8 +1,13 @@
+import org.telegram.telegrambots.meta.api.objects.Chat;
+import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * This class execute the bot
@@ -14,7 +19,14 @@ public class Main {
     public static void main(String[] args) {
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
-            botsApi.registerBot(new CalculatorBot(FileManagement.readUserAndChat()));
+
+            Map<User, Chat> userChatMap = FileManagement.readUserAndChat();
+            ReadWriteLock userChatMapLock = new ReentrantReadWriteLock();
+
+            Thread console = new Thread(new Console(userChatMap, userChatMapLock));
+            console.start();
+
+            botsApi.registerBot(new CalculatorBot(userChatMap, userChatMapLock));
         } catch (TelegramApiException | IOException e) {
             e.printStackTrace();
         }
