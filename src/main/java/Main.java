@@ -19,14 +19,12 @@ public class Main {
     public static void main(String[] args) {
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
+            CalculatorBot bot = new CalculatorBot();
 
-            Map<User, Chat> userChatMap = FileManagement.readUserAndChat();
-            ReadWriteLock userChatMapLock = new ReentrantReadWriteLock();
-
-            Thread console = new Thread(new Console(userChatMap, userChatMapLock));
+            Thread console = new Thread(new Console(bot));
             console.start();
 
-            botsApi.registerBot(new CalculatorBot(userChatMap, userChatMapLock));
+            botsApi.registerBot(bot);
         } catch (TelegramApiException | IOException e) {
             e.printStackTrace();
         }
