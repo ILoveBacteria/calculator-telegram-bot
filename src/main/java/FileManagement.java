@@ -26,7 +26,7 @@ public class FileManagement {
                 append(user.getSupportInlineQueries()).append(",").
                 append("\n");
 
-        Files.writeString(PATH_USERS, str, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
+        Files.writeString(PATH_USERS, str, StandardCharsets.UTF_8, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
     }
 
     private static List<User> readUsers() throws IOException {
@@ -69,7 +69,7 @@ public class FileManagement {
                 append(chat.getType()).append(",").
                 append("\n");
 
-        Files.writeString(PATH_CHATS, str, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
+        Files.writeString(PATH_CHATS, str, StandardCharsets.UTF_8, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
     }
 
     public static Map<User, Chat> readUserAndChat() throws IOException {
