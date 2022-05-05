@@ -1,5 +1,6 @@
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
@@ -7,10 +8,12 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class is the logic and the core of the bot
@@ -27,7 +30,12 @@ public class CalculatorBot extends TelegramLongPollingBot {
     /**
      * List of users who started chatting with the bot
      */
-    private final List<User> users = new ArrayList<>();
+    private final Map<User, Chat> userChatMap;
+
+    public CalculatorBot(Map<User, Chat> userChatMap) {
+        super();
+        this.userChatMap = userChatMap;
+    }
 
     /**
      * This method is executed when a new message is received
@@ -62,9 +70,18 @@ public class CalculatorBot extends TelegramLongPollingBot {
                 }
             }
 
-            if (!users.contains(update.getMessage().getFrom())) {
+            if (!userChatMap.containsKey(update.getMessage().getFrom())) {
                 sendCustomKeyboard(update.getMessage().getChatId().toString());
-                users.add(update.getMessage().getFrom());
+
+                User newUser = update.getMessage().getFrom();
+                Chat newChat = update.getMessage().getChat();
+                userChatMap.put(newUser, newChat);
+                try {
+                    FileManagement.writeUser(newUser);
+                    FileManagement.writeChat(newChat);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
