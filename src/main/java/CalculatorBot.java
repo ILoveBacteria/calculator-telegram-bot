@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * This class is the logic and the core of the bot
@@ -33,12 +34,11 @@ public class CalculatorBot extends TelegramLongPollingBot {
      */
     private final Map<User, Chat> userChatMap;
 
-    private final ReadWriteLock userChatMapLock;
+    private final ReadWriteLock userChatMapLock = new ReentrantReadWriteLock();
 
-    public CalculatorBot(Map<User, Chat> userChatMap, ReadWriteLock userChatMapLock) {
+    public CalculatorBot() throws IOException {
         super();
-        this.userChatMap = userChatMap;
-        this.userChatMapLock = userChatMapLock;
+        this.userChatMap = FileManagement.readUserAndChat();
     }
 
     /**
@@ -151,7 +151,7 @@ public class CalculatorBot extends TelegramLongPollingBot {
      * @param text A {@code String} text message
      * @param chatId Unique identifier for this chat
      */
-    private void sendText(String text, String chatId) {
+    public void sendText(String text, String chatId) {
         SendMessage sendMessage = new SendMessage(chatId, text);
 
         try {
@@ -206,6 +206,14 @@ public class CalculatorBot extends TelegramLongPollingBot {
      */
     private boolean isOperator(char c) {
         return c == '+' || c == '-' || c == '\u00F7' || c == '\u00D7';
+    }
+
+    public Map<User, Chat> getUserChatMap() {
+        return userChatMap;
+    }
+
+    public ReadWriteLock getUserChatMapLock() {
+        return userChatMapLock;
     }
 
     /**
