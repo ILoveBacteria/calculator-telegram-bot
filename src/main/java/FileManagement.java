@@ -23,7 +23,7 @@ public class FileManagement {
                 append(user.getLanguageCode()).append(",").
                 append(user.getCanJoinGroups()).append(",").
                 append(user.getCanReadAllGroupMessages()).append(",").
-                append(user.getSupportInlineQueries()).append(",").
+                append(user.getSupportInlineQueries()).
                 append("\n");
 
         Files.writeString(PATH_USERS, str, StandardCharsets.UTF_8, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
@@ -66,7 +66,7 @@ public class FileManagement {
     public static void writeChat(Chat chat) throws IOException {
         StringBuilder str = new StringBuilder();
         str.append(chat.getId()).append(",").
-                append(chat.getType()).append(",").
+                append(chat.getType()).
                 append("\n");
 
         Files.writeString(PATH_CHATS, str, StandardCharsets.UTF_8, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
