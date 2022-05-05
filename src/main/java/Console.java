@@ -1,17 +1,12 @@
-import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.User;
 
-import java.util.Map;
 import java.util.Scanner;
-import java.util.concurrent.locks.ReadWriteLock;
 
 public class Console implements Runnable {
-    private final Map<User, Chat> userChatMap;
-    private final ReadWriteLock userChatMapLock;
+    private final CalculatorBot bot;
 
-    public Console(Map<User, Chat> userChatMap, ReadWriteLock userChatMapLock) {
-        this.userChatMap = userChatMap;
-        this.userChatMapLock = userChatMapLock;
+    public Console(CalculatorBot bot) {
+        this.bot = bot;
     }
 
     @Override
@@ -21,12 +16,46 @@ public class Console implements Runnable {
             String command = scanner.nextLine();
 
             if (command.equalsIgnoreCase("show users")) {
-                userChatMapLock.readLock().lock();
-                for (User u : userChatMap.keySet()) {
+                bot.getUserChatMapLock().readLock().lock();
+                for (User u : bot.getUserChatMap().keySet()) {
                     System.out.println(u);
                 }
-                userChatMapLock.readLock().unlock();
+                bot.getUserChatMapLock().readLock().unlock();
+
+            } else if (command.startsWith("send message")) {
+                String[] data = command.split(" ", 4);
+
+                if (data.length <= 3) {
+                    System.err.println("No id or message provided!");
+
+                } else {
+                    User user = findUserById(Long.valueOf(data[2]));
+
+                    if (user == null) {
+                        System.err.println("No such user found!");
+
+                    } else {
+                        bot.getUserChatMapLock().readLock().lock();
+                        bot.sendText(data[3], String.valueOf(bot.getUserChatMap().get(user).getId()));
+                        bot.getUserChatMapLock().readLock().unlock();
+                    }
+                }
             }
+        }
+    }
+
+    private User findUserById(Long id) {
+        bot.getUserChatMapLock().readLock().lock();
+
+        try {
+            for (User u : bot.getUserChatMap().keySet()) {
+                if (u.getId().equals(id))
+                    return u;
+            }
+            return null;
+
+        } finally {
+            bot.getUserChatMapLock().readLock().unlock();
         }
     }
 }
