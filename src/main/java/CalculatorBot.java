@@ -57,7 +57,6 @@ public class CalculatorBot extends TelegramLongPollingBot {
             System.out.println(text);
     
             if (messageEntity != null && MessageEntities.hasCommand(messageEntity)) {
-                System.out.println(0);
                 sendMessage = Command.doAction(MessageEntities.getCommand(messageEntity));
                 sendMessage.setChatId(update.getMessage().getChatId().toString());
                 try {
@@ -75,7 +74,7 @@ public class CalculatorBot extends TelegramLongPollingBot {
             }
 
             userChatMapLock.writeLock().lock();
-            if (!userChatMap.containsKey(update.getMessage().getFrom())) {
+            if (!isContainUser(update.getMessage().getFrom())) {
                 sendCustomKeyboard(update.getMessage().getChatId().toString());
 
                 User newUser = update.getMessage().getFrom();
@@ -214,6 +213,20 @@ public class CalculatorBot extends TelegramLongPollingBot {
 
     public ReadWriteLock getUserChatMapLock() {
         return userChatMapLock;
+    }
+    
+    /**
+     * Finding a user by id in database
+     * @param user It is searched in database
+     * @return If the database contains this user
+     */
+    private boolean isContainUser(User user) {
+        for (User u : userChatMap.keySet()) {
+            if (u.getId().equals(user.getId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
