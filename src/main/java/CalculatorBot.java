@@ -21,7 +21,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * This class is the logic and the core of the bot
  *
  * @author Moein Arabi
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class CalculatorBot extends TelegramLongPollingBot {
     /**
