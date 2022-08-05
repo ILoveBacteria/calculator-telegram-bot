@@ -1,6 +1,6 @@
 # Calculator Telegram Bot
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/github/license/ILoveBacteria/calculator-telegram-bot)](https://github.com/ILoveBacteria/calculator-telegram-bot/blob/master/LICENSE)
 [![Issues](https://img.shields.io/github/issues/ILoveBacteria/calculator-telegram-bot)](https://github.com/ILoveBacteria/calculator-telegram-bot/issues)
 [![Forks](https://img.shields.io/github/forks/ILoveBacteria/calculator-telegram-bot)](https://github.com/ILoveBacteria/calculator-telegram-bot/network/members)
 [![Stars](https://img.shields.io/github/stars/ILoveBacteria/calculator-telegram-bot)]()
@@ -8,11 +8,14 @@
 [![Watchers](https://img.shields.io/github/watchers/ILoveBacteria/calculator-telegram-bot)]()
 [![Last commit](https://img.shields.io/github/last-commit/ILoveBacteria/calculator-telegram-bot)](https://github.com/ILoveBacteria/calculator-telegram-bot/commits/master)
 [![Calculator bot](https://img.shields.io/badge/calculator%20bot-on%20telegram-23AAEA)](https://telegram.me/CommonCalculatorBot)
+![Heroku](https://pyheroku-badge.herokuapp.com/?app=calculator-telegrambot)
 
 ## Description
 
 This is a simple calculator working with Telegram bot. 
 Including addition, subtraction, multiplication and division
+
+If the Heroku badge shows green that means you can start the bot from [Telegram](https://telegram.me/CommonCalculatorBot)
 
 ![Preview of bot](https://github.com/ILoveBacteria/calculator-telegram-bot/blob/master/assets/preview.png)
 
@@ -59,7 +62,7 @@ git clone https://github.com/ILoveBacteria/calculator-telegram-bot.git
 in the `CalculatorBot` class in the `getBotToken()` method
 
 3. You must enter the username of your bot without '@' in the `CalculatorBot` class in the `getBotUsername()` method
-4. Install [JDK 8](https://www.oracle.com/java/technologies/downloads) or later
+4. Install [JDK 11](https://www.oracle.com/java/technologies/downloads) or later
 5. Install [Maven 3](https://maven.apache.org/download.cgi)
 6. Build the project:
 
