@@ -13,7 +13,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * This class execute the bot
  *
  * @author Moein Arabi
- * @version 1.0.0
  */
 public class Main {
     public static void main(String[] args) {

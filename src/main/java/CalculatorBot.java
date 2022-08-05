@@ -33,7 +33,10 @@ public class CalculatorBot extends TelegramLongPollingBot {
      * List of users who started chatting with the bot
      */
     private final Map<User, Chat> userChatMap;
-
+    
+    /**
+     * A lock for preventing race conditions
+     */
     private final ReadWriteLock userChatMapLock = new ReentrantReadWriteLock();
 
     public CalculatorBot() throws IOException {

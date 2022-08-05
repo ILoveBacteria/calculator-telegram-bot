@@ -2,6 +2,11 @@ import org.telegram.telegrambots.meta.api.objects.User;
 
 import java.util.Scanner;
 
+/**
+ * This class provides commands to manage the bot
+ * show users: Prints all users that have used the bot so far
+ * send message: Manually sends a message to a specific user
+ */
 public class Console implements Runnable {
     private final CalculatorBot bot;
 

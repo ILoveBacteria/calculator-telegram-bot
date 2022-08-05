@@ -9,10 +9,18 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
 
+/**
+ * Saves and loads users and their chat id in files
+ */
 public class FileManagement {
     private static final Path PATH_USERS = Paths.get("users.csv");
     private static final Path PATH_CHATS = Paths.get("chats.csv");
-
+    
+    /**
+     * Writes a {@link User} in file
+     * @param user The user that must be written in file
+     * @throws IOException if any problems occur in writing to file
+     */
     public static void writeUser(User user) throws IOException {
         StringBuilder str = new StringBuilder();
         str.append(user.getId()).append(",").
@@ -28,7 +36,12 @@ public class FileManagement {
 
         Files.writeString(PATH_USERS, str, StandardCharsets.UTF_8, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
     }
-
+    
+    /**
+     * Reads all users from file
+     * @return {@link  List} of users
+     * @throws IOException if any problems occur in reading from file
+     */
     private static List<User> readUsers() throws IOException {
         List<User> users = new ArrayList<>();
 
@@ -46,7 +59,12 @@ public class FileManagement {
 
         return users;
     }
-
+    
+    /**
+     * Reads all chats from file
+     * @return {@link  List} of chats
+     * @throws IOException if any problems occur in reading from file
+     */
     private static List<Chat> readChats() throws IOException {
         List<Chat> chats = new ArrayList<>();
 
@@ -62,7 +80,12 @@ public class FileManagement {
 
         return chats;
     }
-
+    
+    /**
+     * Writes a {@link Chat} in file
+     * @param chat The chat that must be written in file
+     * @throws IOException if any problems occur in writing to file
+     */
     public static void writeChat(Chat chat) throws IOException {
         StringBuilder str = new StringBuilder();
         str.append(chat.getId()).append(",").
@@ -71,7 +94,12 @@ public class FileManagement {
 
         Files.writeString(PATH_CHATS, str, StandardCharsets.UTF_8, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
     }
-
+    
+    /**
+     * Reads both users and chats
+     * @return {@link Map} of user and chat
+     * @throws IOException if any problems occur in reading from file
+     */
     public static Map<User, Chat> readUserAndChat() throws IOException {
         List<User> users = readUsers();
         List<Chat> chats = readChats();

@@ -4,7 +4,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
  * The Command class contains bot commands.
  *
  * @author Moein Arabi
- * @version 1.0.0
  */
 public class Command {
     private static final String START = "/start";
