@@ -1,13 +1,8 @@
-import org.telegram.telegrambots.meta.api.objects.Chat;
-import org.telegram.telegrambots.meta.api.objects.User;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
-import org.telegram.telegrambots.meta.TelegramBotsApi;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * This class execute the bot
@@ -17,6 +12,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class Main {
     public static void main(String[] args) {
         try {
+            new HerokuHttpServer(Integer.parseInt(args[0])).run();
+            
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
             CalculatorBot bot = new CalculatorBot();
 
